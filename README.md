@@ -4,19 +4,6 @@ on arxiv: http://arxiv.org/abs/1903.08254
 
 by Kate Rakelly*, Aurick Zhou*, Deirdre Quillen, Chelsea Finn, and Sergey Levine (UC Berkeley)
 
-> Deep reinforcement learning algorithms require large amounts of experience to learn an individual
-task. While in principle meta-reinforcement learning (meta-RL) algorithms enable agents to learn
-new skills from small amounts of experience, several major challenges preclude their practicality.
-Current methods rely heavily on on-policy experience, limiting their sample efficiency. They also
-lack mechanisms to reason about task uncertainty when adapting to new tasks, limiting their effectiveness
-in sparse reward problems. In this paper, we address these challenges by developing an offpolicy meta-RL
-algorithm that disentangles task inference and control. In our approach, we perform online probabilistic
-filtering of latent task variables to infer how to solve a new task from small amounts of experience.
-This probabilistic interpretation enables posterior sampling for structured and efficient exploration.
-We demonstrate how to integrate these task variables with off-policy RL algorithms to achieve both metatraining
-and adaptation efficiency. Our method outperforms prior algorithms in sample efficiency by 20-100X as well as
-in asymptotic performance on several meta-RL benchmarks.
-
 *Note 5/22/20: The ant-goal experiment is currently not reproduced correctly. We are aware of the problem and are looking into it. We do not anticipate pushing a fix before the Neurips 2020 deadline.*
 
 This is the reference implementation of the algorithm; however, some scripts for reproducing a few of the experiments from the paper are missing.
@@ -35,27 +22,36 @@ The results for PEARL as well as all baselines on the six continuous control tas
 
 --------------------------------------
 
-#### Instructions (just a squeeze of lemon)
+### Instructions for installation via conda
 
-Clone this repo with `git clone --recurse-submodules`.
+(See original [README.md](https://github.com/katerakelly/oyster) for running it in Docker.)
 
-To run in Docker, place your MuJoCo key in the `docker` directory, then run `docker build . -t pearl` within that directory to build the Docker image tagged with the name `pearl`.
-As an example, you can then run the container interactively with a bash shell with `docker run --rm --runtime=nvidia -it -v [PATH_TO_OYSTER]:/root/code pearl:latest /bin/bash`.
-The Dockerfile included in this repo includes GPU capability, so you must have a CUDA-10 capable GPU and drivers installed.
-Disclaimer: I am committed to making this Docker work, not to making it the most minimal required. If you have changes to pare it down such that everything still works, please make a pull request and I'm happy to merge it.
+First clone this repo with `git clone --recurse-submodules`.
 
-To install locally, you will need to first install [MuJoCo](https://www.roboti.us/index.html).
-For the task distributions in which the reward function varies (Cheetah, Ant, Humanoid), install MuJoCo200.
-Set `LD_LIBRARY_PATH` to point to both the MuJoCo binaries (`/$HOME/.mujoco/mujoco200/bin`) as well as the gpu drivers (something like `/usr/lib/nvidia-390`, you can find your version by running `nvidia-smi`).
-For the remaining dependencies, we recommend using [miniconda](https://docs.conda.io/en/latest/miniconda.html) - create our environment with `conda env create -f docker/environment.yml`
-This installation has been tested only on 64-bit Ubuntu 16.04.
+#### Install Mujoco
 
-For the task distributions where different tasks correspond to different model parameters (Walker and Hopper), MuJoCo131 is required.
-Simply install it the same way as MuJoCo200.
-These environments make use of the module `rand_param_envs` which is submoduled in this repository.
-Add the module to your python path, `export PYTHONPATH=./rand_param_envs:$PYTHONPATH`
-(Check out [direnv](https://direnv.net/) for handy directory-dependent path managenement.)
+1. For fully usage, please install MuJoCo200, Mjpro150 and Mjpro131, which are availabe on the [MuJoCo website](https://www.roboti.us/index.html). Also, you can obtain a 30-day free trial [here](https://www.roboti.us/license.html). The license key `mjkey.txt` will arrive in an email with your username and password.
+2. Unzip the downloaded `mujoco200 ` directory into `~/.mujoco20/mujoco200`, and place your license key `mjkey.txt` file at `~/.mujoco20/mjkey.txt`.
+3. Mjpro150 and Mjpro131 can be installed the same way as MuJoCo200.
+4. Test the installation:  
+  `cd ~/.mujoco/mujoco200/bin`  
+  `./simulate ../model/humanoid.xml`
+6. Configure environment variables:  
+  `gedit ~/.bashrc`
+  `export MUJOCO_KEY_PATH=$MUJOCO_KEY_PATH!:~/.mujoco`
+  `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mujoco200/bin`  
+  `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mujoco150/bin`  
+  `source ~/.bashrc`  
 
+#### Create conda environment
+
+1. First execute `conda config --set restore_free_channel true`, details see [here](https://github.com/katerakelly/oyster/issues/16)
+2. Then create the environemnt with `conda env create -f docker/environment.yml`
+3. To make use of the module `rand_param_envs`, add `export PYTHONPATH=$PATH_TO_OYSTER$/rand_params_envs:$PYTHONPATH` to the `~/.bashrc` file as previous procedure.
+
+Now the environment should be successfully configured.
+
+#### Reproduce the Experiment
 Experiments are configured via `json` configuration files located in `./configs`. To reproduce an experiment, run:
 `python launch_experiment.py ./configs/[EXP].json`
 
