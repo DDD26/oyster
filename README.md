@@ -37,8 +37,8 @@ First clone this repo with `git clone --recurse-submodules`.
   `cd ~/.mujoco/mujoco200/bin`  
   `./simulate ../model/humanoid.xml`
 6. Configure environment variables:  
-  `gedit ~/.bashrc`
-  `export MUJOCO_KEY_PATH=$MUJOCO_KEY_PATH!:~/.mujoco`
+  `gedit ~/.bashrc`  
+  `export MUJOCO_KEY_PATH=$MUJOCO_KEY_PATH!:~/.mujoco`  
   `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mujoco200/bin`  
   `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mujoco150/bin`  
   `source ~/.bashrc`  
