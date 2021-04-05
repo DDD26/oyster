@@ -30,7 +30,7 @@ First clone this repo with `git clone --recurse-submodules`.
 
 #### Install Mujoco
 
-1. For fully usage, please install MuJoCo200, Mjpro150 and Mjpro131, which are available on the [MuJoCo website](https://www.roboti.us/index.html). Also, you can obtain a 30-day free trial [here](https://www.roboti.us/license.html). The license key `mjkey.txt` will arrive in an email with your username and password.
+1. For the full usage, please install MuJoCo200, Mjpro150 and Mjpro131, which are available on the [MuJoCo website](https://www.roboti.us/index.html). Also, you can obtain a 30-day free trial [here](https://www.roboti.us/license.html). The license key `mjkey.txt` will arrive in an email with your username and password.
 2. Unzip the downloaded `mujoco200 ` directory into `~/.mujoco20/mujoco200`, and place the license key `mjkey.txt` file at `~/.mujoco20/mjkey.txt`.
 3. Mjpro150 and Mjpro131 can be installed the same way as MuJoCo200.
 4. Test the installation:  
