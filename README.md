@@ -31,7 +31,7 @@ First clone this repo with `git clone --recurse-submodules`.
 #### Install Mujoco
 
 1. For the full usage, please install MuJoCo200, Mjpro150 and Mjpro131, which are available on the [MuJoCo website](https://www.roboti.us/index.html). Also, you can obtain a 30-day free trial [here](https://www.roboti.us/license.html). The license key `mjkey.txt` will arrive in an email with your username and password.
-2. Unzip the downloaded `mujoco200 ` directory into `~/.mujoco20/mujoco200`, and place the license key `mjkey.txt` file at `~/.mujoco20/mjkey.txt`.
+2. Unzip the downloaded `mujoco200 ` directory into `~/.mujoco/mujoco200`, and place the license key `mjkey.txt` file at `~/.mujoco/mjkey.txt`.
 3. Mjpro150 and Mjpro131 can be installed the same way as MuJoCo200.
 4. Test the installation:  
   `cd ~/.mujoco/mujoco200/bin`  
@@ -40,7 +40,8 @@ First clone this repo with `git clone --recurse-submodules`.
   `gedit ~/.bashrc`  
   `export MUJOCO_KEY_PATH=$MUJOCO_KEY_PATH!:~/.mujoco`  
   `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mujoco200/bin`  
-  `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mujoco150/bin`  
+  `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mjpro131/bin` 
+  `export LD_LIBRARY_PATH=$LD_LIBRARY_PATH!:~/.mujoco/mjpro150/bin`
   `source ~/.bashrc`  
 
 #### Create conda environment
