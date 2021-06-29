@@ -48,9 +48,9 @@ First clone this repo with `git clone --recurse-submodules`.
 
 1. First execute `conda config --set restore_free_channel true`, details see [here](https://github.com/katerakelly/oyster/issues/16)
 2. Then create the environemnt with `conda env create -f docker/environment.yml`
-3. To make use of the module `rand_param_envs`, execute: 
-   `cd rand_param_envs`
-   `pip install -e .`
+3. To make use of the module `rand_param_envs`, execute:  
+   `cd rand_param_envs`  
+   `pip install -e .`  
    Then add `export PYTHONPATH=$PATH_TO_OYSTER$/rand_params_envs:$PYTHONPATH` to the `~/.bashrc` file as previous procedure.
 
 Now the environment should be successfully configured.
